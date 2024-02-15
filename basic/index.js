@@ -18,27 +18,21 @@ function jeuDeJustePrix(min, max) {
             return `Bravo! Vous avez deviné le juste prix en ${tentatives} tentatives.`;
         }
     }
-
-    return verifierConjecture;
-}
-
-// Exemple d'utilisation
-const minNombre = 1;
-const maxNombre = 100;
-const jouer = jeuDeJustePrix(minNombre, maxNombre);
-
-// Boucle de jeu 
-while (true) {
-    const conjectureJoueur = parseInt(prompt(`Devinez le nombre entre ${minNombre} et ${maxNombre}:`));
-
-    if (isNaN(conjectureJoueur)) {
-        alert("Veuillez entrer un nombre valide.");
-    } else {
-        const resultat = jouer(conjectureJoueur);
-        alert(resultat);
-
-        if (resultat.includes("Bravo")) {
-            break; // Fin du jeu si la conjecture est correcte
+    do {
+        const conjectureJoueur = parseInt(prompt(`Devinez le nombre entre ${minNombre} et ${maxNombre}:`));
+    
+        if (isNaN(conjectureJoueur)) {
+            alert("Veuillez entrer un nombre valide.");
+        } else {
+            const resultat = verifierConjecture(conjectureJoueur);
+            alert(resultat);
+    
+            if (resultat.includes("Bravo")) {
+                break; // Fin du jeu si la conjecture est correcte
+            }
         }
-    }
+    }while (conjectureJoueur == nombreSecret);
 }
+
+
+module.exports = {jeuDeJustePrix}
